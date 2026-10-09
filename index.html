@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" translate="no" class="notranslate">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google" content="notranslate">
+<meta name="googlebot" content="notranslate">
+<title>Happy Birthday DUAA</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Amiri:wght@700&family=Dancing+Script&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+.notranslate{translate:no}
+body{background:#050108;min-height:100vh;overflow:hidden;display:flex;justify-content:center;align-items:center}
+#intro{position:fixed;inset:0;background: radial-gradient(ellipse at center, #1a0a14 0%, #05020a 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:100;transition:opacity.8s}
+#intro h1{font-family:'Amiri',serif;font-size:100px;color:#fff;text-shadow:0 0 30px #ff4d8d}
+#readyBtn{margin-top:20px;padding:16px 55px;font-size:22px;font-family:'Amiri',serif;background: linear-gradient(90deg,#ff2d78,#ff6a9f);border:none;border-radius:50px;color:white;cursor:pointer;box-shadow:0 0 30px rgba(255,45,120,.6)}
+#main{width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;opacity:0;transition:opacity 1s;padding:20px;background: radial-gradient(ellipse at center, #120812 0%, #050108 70%)}
+h2{font-family:'Great Vibes',cursive;font-size:48px;color:#ff3e8a;text-shadow:0 0 15px #ff3e8a,0 0 35px #ff3e8a}
+h2 span{color:#fff;text-shadow:0 0 15px #fff,0 0 35px #fff}
+.sub{font-family:'Dancing Script',cursive;color:#ffb3d1;font-size:16px;margin-bottom:25px}
+#textBox{width:360px;max-width:90vw;min-height:380px;padding:22px;border:1px solid rgba(255,77,141,0.2);border-radius:20px;background:rgba(255,77,141,0.05);line-height:2.1;text-align:center}
+.word{font-family:'Great Vibes',cursive;font-size:20px;color:#ffb3d6;text-shadow:0 0 5px #fff,0 0 12px #ff4d8d,0 0 25px #ff2d78;opacity:0;animation:show.6s forwards;display:inline-block;margin:0 4px}
+.word.duaa{font-size:29px;color:#fff;text-shadow:0 0 10px #fff,0 0 25px #ff4d8d,0 0 50px #ff2d78}
+@keyframes show{to{opacity:1}}
+.cursor{display:inline-block;width:2px;height:20px;background:#ff6ab3;box-shadow:0 0 8px #ff4d8d;margin-left:4px;animation:blink.7s infinite;vertical-align:middle}
+@keyframes blink{0%,50%{opacity:1} 51%,100%{opacity:0}}
+#bgAudio{position:absolute;left:-9999px}
+</style>
+</head>
+<body class="notranslate">
+
+<audio id="bgAudio" loop preload="auto" playsinline crossorigin="anonymous">
+  <source src="https://files.catbox.moe/6pa0rw.mp4" type="video/mp4">
+</audio>
+
+<div id="intro" class="notranslate">
+  <h1 class="notranslate" translate="no">مستعدة</h1>
+  <button id="readyBtn" onclick="go()" class="notranslate" translate="no">مستعدة ❤️</button>
+</div>
+
+<div id="main" class="notranslate">
+  <h2 class="notranslate" translate="no">Happy Birthday <span>DUAA</span></h2>
+  <div class="sub notranslate" translate="no">my love, my everything</div>
+  <div id="textBox" class="notranslate" translate="no"></div>
+</div>
+
+<script>
+const audio=document.getElementById('bgAudio');
+let ctx,gain,src;
+function go(){
+  document.getElementById('intro').style.opacity=0;
+  setTimeout(()=>document.getElementById('intro').style.display='none',800);
+  document.getElementById('main').style.opacity=1;
+  if(!ctx){
+    ctx=new (window.AudioContext||window.webkitAudioContext)();
+    src=ctx.createMediaElementSource(audio);
+    gain=ctx.createGain();
+    gain.gain.value = 3.0; // 300% VOL
+    src.connect(gain);
+    gain.connect(ctx.destination);
+  }
+  ctx.resume();
+  audio.volume=1; audio.muted=false; audio.play();
+  typeText();
+}
+const vocab=["Happy","Birthday","My","Love","You","Are","My","Everything","My","Queen","DUAA","I","Love","You","So","Much","Forever","Yours","My","Heart","Beats","For","You","Only","DUAA","My","Life","My","Soul","Happy","Birthday","DUAA"];
+function typeText(){
+  const box=document.getElementById('textBox');
+  let i=0;
+  let timer=setInterval(()=>{
+    if(i>=vocab.length){ clearInterval(timer); box.querySelector('.cursor')?.remove(); return; }
+    box.querySelector('.cursor')?.remove();
+    let s=document.createElement('span');
+    s.className='word '+(vocab[i]==='DUAA'?'duaa':'');
+    s.textContent=vocab[i]+' ';
+    s.setAttribute('translate','no'); s.classList.add('notranslate');
+    box.appendChild(s);
+    let c=document.createElement('span'); c.className='cursor';
+    box.appendChild(c);
+    i++;
+  }, 280);
+}
+
+// منع الترجمة
+if(window.google) google.translate._const._c="notranslate";
+</script>
+</body>
+  </html>
